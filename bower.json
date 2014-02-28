@@ -1,0 +1,10 @@
+{
+  "name": "neo4j-url",
+  "version": "0.1.0",
+  "dependencies": {
+    "superagent": "~0.16.0"
+  },
+  "devDependencies": {
+  },
+  "main": "./dist/neo4j-url"
+}
