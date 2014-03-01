@@ -14,7 +14,7 @@
   module.exports = Neo4jUrl = (function(_super) {
     __extends(Neo4jUrl, _super);
 
-    Neo4jUrl.VERSION = '0.1.0';
+    Neo4jUrl.VERSION = '0.1.1';
 
     function Neo4jUrl(url) {
       var deferred_resource,
@@ -30,6 +30,18 @@
         return deferred_resource.resolve(neo4j);
       });
     }
+
+    Neo4jUrl.prototype.ready = function() {
+      var deferred_this,
+        _this = this;
+      deferred_this = Q.defer();
+      this.data.ready().then(function() {
+        return _this.management.ready();
+      }).then(function() {
+        return deferred_this.resolve(_this);
+      });
+      return deferred_this.promise;
+    };
 
     Neo4jUrl.prototype.toString = function() {
       return "Neo4jUrl " + " addressing " + this.url;

@@ -13,10 +13,10 @@ module.exports = class Neo4jManagement extends Discoverable
   # Constructs a new Neo4jManagement
   #
   #
-  # @param {promise} promised Neo4jUrl.resource
+  # @param {promise} promised Neo4jUrl resource
   constructor: (promisedNeo4j) ->
-    # deferred_management = Q.defer()
-    # @resource = deferred_management.promise
+    deferred_this = Q.defer()
+    @promise = deferred_this.promise
 
     promisedNeo4j
       .then((neo4j) =>
@@ -24,6 +24,9 @@ module.exports = class Neo4jManagement extends Discoverable
         @get()
           .then((management) =>
             _.assign(this, management)
-            # deferred_management.resolve(management)
+            deferred_this.resolve(this)
           )
       )
+
+  ready: () ->
+    return @promise

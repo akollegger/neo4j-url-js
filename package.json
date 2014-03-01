@@ -1,6 +1,6 @@
 {
   "name": "neo4j-url",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./build/neo4j-url",
   "bin": {
     "neo4j-url": "./bin/neo4j-url"
@@ -8,7 +8,7 @@
   "scripts": {
     "test": "grunt"
   },
-  "description": "Thin HTTP facade for Neo4j.",
+  "description": "Discover Neo4j's REST endpoints.",
   "homepage": "https://github.com/akollegger/neo4j-url-js",
   "bugs": "https://github.com/akollegger/neo4j-url-js/issues",
   "author": {
@@ -29,7 +29,8 @@
     "autocmdr": "0.0.6",
     "superagent": "~0.16.0",
     "q": "~1.0.0",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "json3": "~3.3.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

@@ -13,14 +13,22 @@
     __extends(Neo4jData, _super);
 
     function Neo4jData(promisedNeo4j) {
-      var _this = this;
+      var deferred_this,
+        _this = this;
+      deferred_this = Q.defer();
+      this.promise = deferred_this.promise;
       promisedNeo4j.then(function(neo4j) {
         _this.url = neo4j.data;
         return _this.get().then(function(data) {
-          return _.assign(_this, data);
+          _.assign(_this, data);
+          return deferred_this.resolve(_this);
         });
       });
     }
+
+    Neo4jData.prototype.ready = function() {
+      return this.promise;
+    };
 
     return Neo4jData;
 

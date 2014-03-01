@@ -10,7 +10,7 @@ Neo4jManagement = require('./neo4j-management')
 module.exports = class Neo4jUrl extends Discoverable
 
   # @property[String] Current version.
-  @VERSION: '0.1.0'
+  @VERSION: '0.1.1'
 
   #
   # Constructs a new Neo4jUrl
@@ -32,6 +32,19 @@ module.exports = class Neo4jUrl extends Discoverable
       .then((neo4j) =>
         deferred_resource.resolve(neo4j)
       )
+
+  ready: () ->
+    deferred_this = Q.defer()
+
+    @data.ready()
+      .then( () =>
+        @management.ready()
+      )
+      .then( () =>
+        deferred_this.resolve(this)
+      )
+
+    return deferred_this.promise
 
   toString: () ->
     return "Neo4jUrl " + " addressing " + @url

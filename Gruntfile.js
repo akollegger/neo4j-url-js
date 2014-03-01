@@ -39,7 +39,7 @@ module.exports = function (grunt) {
           reporter:'spec',
         },
         src: ['test/**/*.coffee']
-      } 
+      }
     },
     jshint: {
       options: {
@@ -69,10 +69,10 @@ module.exports = function (grunt) {
     },
     browserify: {
       basic: {
-        src: ['build/neo4j-http.js'],
-        dest: 'dist/neo4j-http.js',
+        src: ['build/neo4j-url.js'],
+        dest: 'dist/neo4j-url.js',
         options: {
-          standalone: 'Neo4jHttp',
+          standalone: 'Neo4jUrl',
           external: ['superagent']
         }
       }

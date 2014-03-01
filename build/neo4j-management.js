@@ -13,14 +13,22 @@
     __extends(Neo4jManagement, _super);
 
     function Neo4jManagement(promisedNeo4j) {
-      var _this = this;
+      var deferred_this,
+        _this = this;
+      deferred_this = Q.defer();
+      this.promise = deferred_this.promise;
       promisedNeo4j.then(function(neo4j) {
         _this.url = neo4j.management;
         return _this.get().then(function(management) {
-          return _.assign(_this, management);
+          _.assign(_this, management);
+          return deferred_this.resolve(_this);
         });
       });
     }
+
+    Neo4jManagement.prototype.ready = function() {
+      return this.promise;
+    };
 
     return Neo4jManagement;
 
